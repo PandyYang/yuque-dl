@@ -119,16 +119,20 @@ async function downloadArticle(params: DownloadArticleParams): Promise<boolean> 
   }
 
   mdData = mdData.replace(/<br(\s?)\/>/gm, '\n')
+  // 替换a标签
+  mdData = mdData.replace(/<a\s+name="[^"]*"><\/a>/gi, '')
+  // 替换文档中的链接
+  mdData = mdData.replace(/\[([^\]]*?)\]\([^)]+?\)/gi, '参见文章：$1')
 
-  if (articleTitle) {
-    mdData = `# ${articleTitle}\n<!--page header-->\n\n${mdData}\n\n`
-  }
+  // if (articleTitle) {
+  //   mdData = `# ${articleTitle}\n<!--page header-->\n\n${mdData}\n\n`
+  // }
   // if (articleUrl){
   //   mdData += `<!--page footer-->\n- 原文: <${articleUrl}>`
   // }
 
   try {
-    await writeFile(saveFilePath, mdData)
+    await writeFile(saveFilePath, mdData, 'utf8')
     return true
   } catch(e) {
     throw new Error(`download article Error ${articleUrl}: ${e.message}`)

@@ -1,3 +1,12 @@
+# 编译和构建
+
+- npm install -g pnpm
+- npm run dev
+dev其实是监听文件变更
+- npm run build
+- node dist/es/cli.js --help
+
+
 # yuque-dl
 
 语雀知识库下载为本地markdown
