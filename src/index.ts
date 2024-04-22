@@ -123,9 +123,9 @@ async function downloadArticle(params: DownloadArticleParams): Promise<boolean> 
   if (articleTitle) {
     mdData = `# ${articleTitle}\n<!--page header-->\n\n${mdData}\n\n`
   }
-  if (articleUrl){
-    mdData += `<!--page footer-->\n- 原文: <${articleUrl}>`
-  }
+  // if (articleUrl){
+  //   mdData += `<!--page footer-->\n- 原文: <${articleUrl}>`
+  // }
 
   try {
     await writeFile(saveFilePath, mdData)
